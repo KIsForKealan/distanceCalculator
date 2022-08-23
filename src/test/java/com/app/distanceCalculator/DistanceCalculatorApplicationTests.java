@@ -20,6 +20,20 @@ class DistanceCalculatorApplicationTests {
 	@Autowired
 	PingService pingService;
 
+	@Autowired
+	AddDistanceService addDistanceService;
+
+	@Test
+	void addDistancesTest() throws JsonProcessingException {
+		DistanceEntity expected = new DistanceEntity(3.7);
+        DistanceEntity a = new DistanceEntity(1.5);
+        DistanceEntity b = new DistanceEntity(2.2);
+		DistanceEntity[] distances = new DistanceEntity[]{ a, b };
+        DistanceEntity actual = addDistanceService.addDistances(distances);
+        Assertions.assertNotNull(actual);
+        Assertions.assertEquals(expected.getValue(), actual.getValue());
+	}
+
 	@Test
 	void pingServiceTest() {
 		Assertions.assertNotNull(pingService.retrievePing());
